@@ -2,4 +2,6 @@ __pycache__
 /qr
 /env
 /out
+/.vscode
+/.idea
 config.json
