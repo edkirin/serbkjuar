@@ -8,7 +8,11 @@ from app.processing import get_image_list, process_images
 
 CONFIG_FILENAME = "config.json"
 
-logging.basicConfig(level=logging.INFO)
+# formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(levelname)s: %(message)s",
+)
 
 
 def create_arg_parser() -> argparse.ArgumentParser:

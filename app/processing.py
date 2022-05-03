@@ -89,10 +89,10 @@ def process_images(session: Session, image_files: List[QRImageFile]):
         raise Exception(f"Error loading font file '{font_file}': {e}")
 
     files_count = len(image_files)
-    for n, image_file in enumerate(image_files[:1]):
+    for n, image_file in enumerate(image_files):
         logging.info(f"Processing file {n + 1}/{files_count}: '{image_file}'")
 
-        machine = MachineModel.get_by_id(session=session, id=1)
+        machine = MachineModel.get_by_id(session=session, id=image_file.machine_id)
         if not machine:
             logging.error(
                 f"Machine with id {image_file.machine_id} does not exists in database"
