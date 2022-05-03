@@ -1,6 +1,7 @@
 import json
 from dataclasses import dataclass
-from pathlib import Path
+import pathlib
+from typing import Optional
 
 
 @dataclass
@@ -11,12 +12,16 @@ class AppConfig:
     db_user: str
     db_password: str
     font_filename: str
+    text_color: str = "#000000"
+    text_height: int = 30
+    text_y_offset: int = 0
+    out_dir: Optional[pathlib.Path] = None
 
 
 config: AppConfig
 
 
-def read_config(filename: Path):
+def read_config(filename: pathlib.Path):
     global config
 
     with open(filename) as f:

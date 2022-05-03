@@ -1,0 +1,11 @@
+{
+    "db_host": "localhost",
+    "db_port": 5432,
+    "db_name": "my-db-name",
+    "db_user": "my-db-user",
+    "db_password": "my-db-password",
+    "font_filename": "DejaVuSans.ttf",
+    "text_color": "#000000",
+    "text_height": 30,
+    "text_y_offset": 7
+}

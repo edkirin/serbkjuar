@@ -33,15 +33,15 @@ def main():
     args = parser.parse_args()
     script_dir = pathlib.Path(__file__).parent
 
-    source_dir = pathlib.Path(script_dir).joinpath(args.source)
-    out_dir = pathlib.Path(script_dir).joinpath(args.out)
-
     config_filename = pathlib.Path(script_dir).joinpath(CONFIG_FILENAME)
     try:
         conf.read_config(config_filename)
     except Exception as e:
         logging.error(e)
         return
+
+    source_dir = pathlib.Path(script_dir).joinpath(args.source)
+    conf.config.out_dir = pathlib.Path(script_dir).joinpath(args.out)
 
     session = create_db_session(
         db_user=conf.config.db_user,
