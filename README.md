@@ -1,5 +1,13 @@
 # SerbKjuAr
 
+What does it do?
+- Read png files from source directory
+- Parses file name into machine id
+- Read machine external_id from database
+- Write external_id as text to the image
+- Save image in output directory
+
+
 ## Installation
 
 Clone repository
@@ -93,3 +101,7 @@ INFO: Writing image: '/tmp/qrout/101.png' with external_id ext-101-12345678
 INFO: Processing file 10/10: '/tmp/qr/100.png'
 INFO: Writing image: '/tmp/qrout/100.png' with external_id ext-100-12345678
 ```
+
+### Output image
+
+![Sample output image](assets/example-output-101.png "Sample output image")
