@@ -72,7 +72,9 @@ def process_image(machine: MachineModel, image_file: QRImageFile, font: FreeType
         raise Exception("Output directory not defined")
 
     out_filepath = conf.config.out_dir.joinpath(image_file.file_name)
-    logging.info(f"Writing image: '{out_filepath}'")
+    logging.info(
+        f"Writing image: '{out_filepath}' with external_id {machine.external_id}"
+    )
 
     image.save(
         out_filepath,

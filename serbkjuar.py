@@ -16,7 +16,7 @@ logging.basicConfig(
 
 
 def create_arg_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Add machine external ids to images")
+    parser = argparse.ArgumentParser(description="Add machine external ids to images.")
     parser.add_argument(
         "--source",
         type=str,
@@ -27,7 +27,7 @@ def create_arg_parser() -> argparse.ArgumentParser:
         "--out",
         type=str,
         default="./out",
-        help="Destination directory",
+        help="Output directory",
     )
     return parser
 
