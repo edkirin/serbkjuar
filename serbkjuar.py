@@ -1,12 +1,10 @@
 import argparse
-import glob
 import logging
 import pathlib
-from typing import List
 
-from serbkjuar.common import QRImageFile
-from serbkjuar.config import read_config
-from serbkjuar.process_image import process_image
+import app.conf as conf
+from app.db import create_db_session
+from app.processing import get_image_list, process_images
 
 CONFIG_FILENAME = "config.json"
 
@@ -30,20 +28,6 @@ def create_arg_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def get_image_list(source_dir: pathlib.Path) -> List[QRImageFile]:
-    logging.info(f"Reading *.png file list from {source_dir}")
-    image_list = []
-    for f in glob.glob(str(source_dir.joinpath("*.png"))):
-        image_list.append(
-            QRImageFile(
-                image_filepath=pathlib.Path(f),
-                file_name=pathlib.Path(f).name,
-                external_id=pathlib.Path(f).stem,
-            )
-        )
-    return image_list
-
-
 def main():
     parser = create_arg_parser()
     args = parser.parse_args()
@@ -54,15 +38,24 @@ def main():
 
     config_filename = pathlib.Path(script_dir).joinpath(CONFIG_FILENAME)
     try:
-        config = read_config(config_filename)
+        conf.read_config(config_filename)
     except Exception as e:
         logging.error(e)
         return
 
-    image_files = get_image_list(source_dir)
+    session = create_db_session(
+        db_user=conf.config.db_user,
+        db_password=conf.config.db_password,
+        db_host=conf.config.db_host,
+        db_port=conf.config.db_port,
+        db_name=conf.config.db_name,
+    )
 
-    for image_file in image_files[:1]:
-        process_image(image_file)
+    image_files = get_image_list(source_dir)
+    try:
+        process_images(session, image_files)
+    except Exception as e:
+        logging.error(e)
 
 
 if __name__ == "__main__":
